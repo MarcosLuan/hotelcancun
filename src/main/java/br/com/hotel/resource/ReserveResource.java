@@ -26,5 +26,13 @@ public class ReserveResource {
     public List<ReserveEntity> reserve() {
         return reserveService.listBookingData();
     }
+
+    @GET
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/byDocument/{document}")
+    public List<ReserveEntity> reserveByDocument(@PathParam("document") String document) {
+        return reserveService.listBookingDataByDocument(document);
+    }
 }
 

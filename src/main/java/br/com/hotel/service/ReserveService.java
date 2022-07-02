@@ -31,7 +31,8 @@ public class ReserveService {
         return reserveRepository.listAll();
     }
 
-    public List<ReserveEntity> listBookingDataByDocument(RegisterReserveDTO bookdata) {
-        return reserveRepository.listByDocument(bookdata.getUserDocument());
+    public List<ReserveEntity> listBookingDataByDocument(String document) {
+        System.out.println(reserveRepository.listByDocument(document));
+        return reserveRepository.listByDocument(document);
     }
 }
