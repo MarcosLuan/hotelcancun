@@ -22,14 +22,14 @@ public class UserResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     @Path("/save")
-    public UserEntity reserve(@RequestBody RegisterUserDTO userData) {
+    public UserEntity userSave(@RequestBody RegisterUserDTO userData) {
         return userService.userSave(userData);
     }
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public List<UserEntity> reserve() {
+    public List<UserEntity> listUser() {
         return userService.listUsers();
     }
 }

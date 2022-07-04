@@ -8,7 +8,6 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 
@@ -68,5 +67,9 @@ public class ReserveService {
     public List<ReserveEntity> listBookingDataByDocument(String document) {
         System.out.println(reserveRepository.listByDocument(document));
         return reserveRepository.listByDocument(document);
+    }
+
+    public boolean deleteById(Long id) {
+        return reserveRepository.deleteById(id);
     }
 }

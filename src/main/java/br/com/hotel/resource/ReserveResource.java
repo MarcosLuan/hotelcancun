@@ -3,10 +3,8 @@ package br.com.hotel.resource;
 import br.com.hotel.dto.RegisterReserveDTO;
 import br.com.hotel.entity.ReserveEntity;
 import br.com.hotel.service.ReserveService;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.inject.Inject;
-import javax.transaction.Transactional;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
@@ -39,5 +37,14 @@ public class ReserveResource {
     public List<ReserveEntity> reserveByDocument(@PathParam("document") String document) {
         return reserveService.listBookingDataByDocument(document);
     }
+
+    @DELETE
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Path("/deleteById/{id}")
+    public boolean deleteById(@PathParam("id") Long id) {
+        return reserveService.deleteById(id);
+    }
+
 }
 

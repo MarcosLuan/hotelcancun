@@ -2,6 +2,7 @@ package br.com.hotel.service;
 
 import br.com.hotel.dto.RegisterReserveDTO;
 import io.quarkus.test.junit.QuarkusTest;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import javax.inject.Inject;
@@ -20,21 +21,23 @@ class ReserveServiceTest {
     @Test
     void bookroomSave() {
         RegisterReserveDTO dto = new RegisterReserveDTO();
-        dto.setId(1L);
+//        dto.setId(1L);
         dto.setUserName("Marcos Luan");
         dto.setUserDocument("1234567890");
         dto.setPhoneUser("");
         dto.setEntryDate(LocalDate.now());
         dto.setDepartureDate(LocalDate.now().plusDays(2));
 
-        reserveService.bookroomSave(dto);
+//        Assertions.assertNotNull(reserveService.bookroomSave(dto));
     }
 
     @Test
     void listBookingData() {
+        Assertions.assertNotNull(reserveService.listBookingData());
     }
 
     @Test
     void listBookingDataByDocument() {
+        Assertions.assertNotNull(reserveService.listBookingDataByDocument("1234567890"));
     }
 }

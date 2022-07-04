@@ -2,10 +2,7 @@ package br.com.hotel.dto;
 
 import io.smallrye.common.constraint.NotNull;
 
-import javax.ejb.Local;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Date;
 
 public class RegisterReserveDTO {
 

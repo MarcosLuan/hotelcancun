@@ -22,14 +22,14 @@ public class RoomResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     @Path("/save")
-    public RoomEntity reserve(@RequestBody RegisterRoomDTO roomData) {
+    public RoomEntity room(@RequestBody RegisterRoomDTO roomData) {
         return roomService.roomSave(roomData);
     }
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public List<RoomEntity> reserve() {
+    public List<RoomEntity> listRoom() {
         return roomService.listRoom();
     }
 }
