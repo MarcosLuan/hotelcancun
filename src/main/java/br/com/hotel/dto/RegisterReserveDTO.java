@@ -2,7 +2,10 @@ package br.com.hotel.dto;
 
 import io.smallrye.common.constraint.NotNull;
 
+import javax.ejb.Local;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 public class RegisterReserveDTO {
 
@@ -18,10 +21,10 @@ public class RegisterReserveDTO {
     private String phoneUser;
 
     @NotNull
-    private LocalDateTime entryDate;
+    private LocalDate entryDate;
 
     @NotNull
-    private LocalDateTime departureDate;
+    private LocalDate departureDate;
 
     public Long getId() {
         return id;
@@ -55,19 +58,19 @@ public class RegisterReserveDTO {
         this.phoneUser = phoneUser;
     }
 
-    public LocalDateTime getEntryDate() {
+    public LocalDate getEntryDate() {
         return entryDate;
     }
 
-    public void setEntryDate(LocalDateTime entryDate) {
+    public void setEntryDate(LocalDate entryDate) {
         this.entryDate = entryDate;
     }
 
-    public LocalDateTime getDepartureDate() {
+    public LocalDate getDepartureDate() {
         return departureDate;
     }
 
-    public void setDepartureDate(LocalDateTime departureDate) {
+    public void setDepartureDate(LocalDate departureDate) {
         this.departureDate = departureDate;
     }
 }

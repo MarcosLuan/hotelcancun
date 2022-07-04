@@ -5,7 +5,9 @@ import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Entity(name = "reserve")
 public class ReserveEntity extends PanacheEntityBase {
@@ -24,10 +26,10 @@ public class ReserveEntity extends PanacheEntityBase {
     private String phoneUser;
 
     @Column(name = "entry_date", nullable = false)
-    private LocalDateTime entryDate;
+    private LocalDate entryDate;
 
     @Column(name = "departure_date", nullable = false)
-    private LocalDateTime departureDate;
+    private LocalDate departureDate;
 
     public Long getId() {
         return id;
@@ -61,19 +63,19 @@ public class ReserveEntity extends PanacheEntityBase {
         this.phoneUser = phoneUser;
     }
 
-    public LocalDateTime getEntryDate() {
+    public LocalDate getEntryDate() {
         return entryDate;
     }
 
-    public void setEntryDate(LocalDateTime entryDate) {
+    public void setEntryDate(LocalDate entryDate) {
         this.entryDate = entryDate;
     }
 
-    public LocalDateTime getDepartureDate() {
+    public LocalDate getDepartureDate() {
         return departureDate;
     }
 
-    public void setDepartureDate(LocalDateTime departureDate) {
+    public void setDepartureDate(LocalDate departureDate) {
         this.departureDate = departureDate;
     }
 }
