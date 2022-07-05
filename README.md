@@ -1,59 +1,15 @@
-# hotelcancun Project
-This project uses Quarkus, the Supersonic Subatomic Java Framework.
+# Hotel Cancun Project
 
-If you want to learn more about Quarkus, please visit its website: https://quarkus.io/ .
-
-##Project Requirements
 Post-Covid scenario:
 People are now free to travel everywhere but because of the pandemic, a lot of hotels went
 bankrupt. Some former famous travel places are left with only one hotel.
 You’ve been given the responsibility to develop a booking API for the very last hotel in Cancun.
-The requirements are:
-- API will be maintained by the hotel’s IT department.
-- As it’s the very last hotel, the quality of service must be 99.99 to 100% => no downtime
-- For the purpose of the test, we assume the hotel has only one room available
-- To give a chance to everyone to book the room, the stay can’t be longer than 3 days and
-  can’t be reserved more than 30 days in advance.
-- All reservations start at least the next day of booking,
-- To simplify the use case, a “DAY’ in the hotel room starts from 00:00 to 23:59:59.
-- Every end-user can check the room availability, place a reservation, cancel it or modify it.
-- To simplify the API is insecure.
 
-##Postman requests
-##Bookroom
-###GET all bookrooms
-http://localhost:8082/bookroom
+## 🚀 Starting
 
-###GET bookrooms by document
-http://localhost:8082/bookroom/byDocument/{user_document}
+These instructions will allow you to get a working copy of the project on your local machine for development and testing purposes.
 
-###POST bookrooms save
-http://localhost:8082/bookroom/save
-
-###PUT change bookroom
-http://localhost:8082/bookroom/change
-
-##Users
-###GET all users
-http://localhost:8082/user
-
-###POST save new user
-http://localhost:8082/user/save
-
-##Rooms
-###GET all rooms
-http://localhost:8082/room
-
-###POST save new hotel room
-http://localhost:8082/room/save
-
-Note: Used only one room for the hotel
-
-
-
-
-
-## Packaging and running the application
+### 📋 Requirements
 
 The application can be packaged using:
 ```shell script
@@ -68,29 +24,81 @@ If you want to build an _über-jar_, execute the following command:
 ```shell script
 ./mvnw package -Dquarkus.package.type=uber-jar
 ```
-
 The application, packaged as an _über-jar_, is now runnable using `java -jar target/*-runner.jar`.
 
-## Creating a native executable
+###For more information access
+[Related guide section...](https://quarkus.io/guides)
 
-You can create a native executable using: 
-```shell script
-./mvnw package -Pnative
+### 🔧 Configurations
+
+To run this project on your machine, have the necessary java packages installed (JAVA 8 or plus),
+
+After cloning the project, open it in your favorite development environment, start the project and wait for the dependencies to be installed.
+All dependencies in pom.xml are necessary for correct operation.
+
+## ⚙️ Tests
+
+The tests are located in the directory: hotelcancun\src\test.
+Tests can be run normally in your development environment as per your local settings.
+
+## 🔩 Requisitions Postman
+
+###Bookroom
+GET all bookrooms
+```
+http://localhost:8082/bookroom
 ```
 
-Or, if you don't have GraalVM installed, you can run the native executable build in a container using: 
-```shell script
-./mvnw package -Pnative -Dquarkus.native.container-build=true
+GET bookrooms by user document
+```
+http://localhost:8082/bookroom/byDocument/{user_document}
 ```
 
-You can then execute your native executable with: `./target/hotelcancun-1.0.0-SNAPSHOT-runner`
+POST bookrooms save
+```
+http://localhost:8082/bookroom/save
+```
 
-If you want to learn more about building native executables, please consult https://quarkus.io/guides/maven-tooling.
+PUT change bookroom
+```
+http://localhost:8082/bookroom/change
+```
 
-## Provided Code
+###Users
+GET all users
+```
+http://localhost:8082/user
+```
 
-### RESTEasy Reactive
+POST save new user
+```
+http://localhost:8082/user/save
+```
 
-Easily start your Reactive RESTful Web Services
+###Rooms
+GET all rooms
+```
+http://localhost:8082/room
+```
 
-[Related guide section...](https://quarkus.io/guides/getting-started-reactive#reactive-jax-rs-resources)
+POST save new hotel room
+```
+http://localhost:8082/room/save
+```
+Note: Used only one room for the hotel
+
+## 🛠️ built with
+
+* [Java](https://docs.oracle.com/en/java/javase/11/docs/api/) - Programming Language
+* [Quarkus](https://quarkus.io/guides) - Framework Java
+* [Maven](https://maven.apache.org/) - Dependency Manager
+
+## ✒️ Author
+
+* **Marcos Luan Kades** - *Complete Project* - [github](https://github.com/MarcosLuan)
+
+## 🎁 Thanks
+
+* Thank you to everyone interested in the project 🤓.
+
+---
