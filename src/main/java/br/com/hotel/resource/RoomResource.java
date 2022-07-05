@@ -3,7 +3,7 @@ package br.com.hotel.resource;
 import br.com.hotel.dto.RegisterRoomDTO;
 import br.com.hotel.entity.RoomEntity;
 import br.com.hotel.service.RoomService;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;

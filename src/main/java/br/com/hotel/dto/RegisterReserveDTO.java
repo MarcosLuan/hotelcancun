@@ -2,11 +2,14 @@ package br.com.hotel.dto;
 
 import io.smallrye.common.constraint.NotNull;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import java.time.LocalDate;
 
 public class RegisterReserveDTO {
 
     @NotNull
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull

@@ -1,30 +1,18 @@
 package br.com.hotel.entity;
 
-import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
+import io.quarkus.hibernate.orm.panache.PanacheEntity;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
 
 @Entity(name = "room")
-public class RoomEntity extends PanacheEntityBase {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
-    private Long id;
+public class RoomEntity extends PanacheEntity {
 
     @Column(name = "number", nullable = false)
     private int number;
 
     @Column(name = "hotel", nullable = false)
     private String hotelName;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public int getNumber() {
         return number;

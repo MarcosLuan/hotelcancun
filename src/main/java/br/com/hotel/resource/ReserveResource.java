@@ -3,6 +3,7 @@ package br.com.hotel.resource;
 import br.com.hotel.dto.RegisterReserveDTO;
 import br.com.hotel.entity.ReserveEntity;
 import br.com.hotel.service.ReserveService;
+import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
@@ -18,9 +19,17 @@ public class ReserveResource {
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    @Path("save/")
-    public void reserve(RegisterReserveDTO bookData) {
+    @Path("save")
+    public void reserve(@RequestBody RegisterReserveDTO bookData) {
         reserveService.bookroomSave(bookData);
+    }
+
+    @PUT
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Path("change")
+    public void bookroomChange(@RequestBody RegisterReserveDTO bookData) {
+        reserveService.bookroomChange(bookData);
     }
 
     @GET

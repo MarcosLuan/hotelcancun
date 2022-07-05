@@ -1,14 +1,58 @@
 # hotelcancun Project
-
 This project uses Quarkus, the Supersonic Subatomic Java Framework.
 
 If you want to learn more about Quarkus, please visit its website: https://quarkus.io/ .
 
+##Project Requirements
+Post-Covid scenario:
+People are now free to travel everywhere but because of the pandemic, a lot of hotels went
+bankrupt. Some former famous travel places are left with only one hotel.
+You’ve been given the responsibility to develop a booking API for the very last hotel in Cancun.
+The requirements are:
+- API will be maintained by the hotel’s IT department.
+- As it’s the very last hotel, the quality of service must be 99.99 to 100% => no downtime
+- For the purpose of the test, we assume the hotel has only one room available
+- To give a chance to everyone to book the room, the stay can’t be longer than 3 days and
+  can’t be reserved more than 30 days in advance.
+- All reservations start at least the next day of booking,
+- To simplify the use case, a “DAY’ in the hotel room starts from 00:00 to 23:59:59.
+- Every end-user can check the room availability, place a reservation, cancel it or modify it.
+- To simplify the API is insecure.
+
+##Postman requests
+##Bookroom
+###GET all bookrooms
+http://localhost:8082/bookroom
+
+###GET bookrooms by document
+http://localhost:8082/bookroom/byDocument/{user_document}
+
+###POST bookrooms save
+http://localhost:8082/bookroom/save
+
+###PUT change bookroom
+http://localhost:8082/bookroom/change
+
+##Users
+###GET all users
+http://localhost:8082/user
+
+###POST save new user
+http://localhost:8082/user/save
+
+##Rooms
+###GET all rooms
+http://localhost:8082/room
+
+###POST save new hotel room
+http://localhost:8082/room/save
+
+Note: Used only one room for the hotel
 
 
 
 
-Ver essa anotação para gerar o jar
+
 ## Packaging and running the application
 
 The application can be packaged using:

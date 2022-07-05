@@ -2,11 +2,13 @@ package br.com.hotel.service;
 
 import br.com.hotel.dto.RegisterReserveDTO;
 import br.com.hotel.entity.ReserveEntity;
+import br.com.hotel.mapper.ReserveMapper;
 import br.com.hotel.repository.ReserveRepository;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
+import javax.ws.rs.WebApplicationException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
@@ -18,45 +20,36 @@ public class ReserveService {
     @Inject
     ReserveRepository reserveRepository;
 
-    public void bookroomSave(RegisterReserveDTO bookdata) {
+    @Inject
+    ReserveMapper reserveMapper;
+
+    public ReserveEntity bookroomSave(RegisterReserveDTO bookdata) {
 
         if (bookdata==null) {
-            throw new RuntimeException("");
+            throw new WebApplicationException("");
         }
 
-        List<ReserveEntity> bookingRoom = listBookingData();
-        if (Objects.nonNull(bookingRoom)) {
-            bookingRoom.forEach(data -> {
-                if ((bookdata.getEntryDate().isAfter(data.getEntryDate()))
-                        && (bookdata.getEntryDate().isBefore(data.getDepartureDate()))) {
-                    throw new RuntimeException("Já existe reserva para essa data!");
-                } else if(bookdata.getDepartureDate().isAfter(data.getEntryDate())
-                        && bookdata.getDepartureDate().isBefore(data.getDepartureDate())) {
-                    throw new RuntimeException("Já existe reserva para essa data!");
-                } else if (bookdata.getEntryDate().isEqual(data.getEntryDate())
-                        || bookdata.getEntryDate().isEqual(data.getDepartureDate())
-                        || bookdata.getDepartureDate().isEqual(data.getEntryDate())) {
-                    throw new RuntimeException("Já existe reserva para essa data!");
-                }
-            });
+        if (Boolean.TRUE.equals(checkAvailability(bookdata))) {
+            ReserveEntity reserve = reserveMapper.toEntity(bookdata);
+            reserveRepository.persist(reserve);
+            return reserve;
+        }
+        return null;
+    }
+
+    public ReserveEntity bookroomChange(RegisterReserveDTO bookdata) {
+//        ReserveEntity reserve = reserveRepository.findById(bookdata.getId());
+        if (bookdata == null) {
+            return null;
         }
 
-        if (bookdata.getEntryDate().isBefore(LocalDate.now())) {
-            throw new RuntimeException("Data de reserva não pode menor que hoje!");
+        if (Boolean.TRUE.equals(checkAvailability(bookdata))) {
+            ReserveEntity reserve = reserveMapper.toEntity(bookdata);
+            reserveRepository.persist(reserve);
+            return reserve;
         }
 
-        if (bookdata.getEntryDate().isAfter(LocalDate.now().plusDays(30))) {
-            throw new RuntimeException("Data de reserva não pode ser maior que 30 dias!");
-        }
-
-        ReserveEntity reserveEntity = new ReserveEntity();
-        reserveEntity.setUserName(bookdata.getUserName());
-        reserveEntity.setUserDocument(bookdata.getUserDocument());
-        reserveEntity.setPhoneUser(bookdata.getPhoneUser());
-        reserveEntity.setEntryDate(bookdata.getEntryDate());
-        reserveEntity.setDepartureDate(bookdata.getDepartureDate());
-
-        reserveRepository.persist(reserveEntity);
+        return null;
     }
 
     public List<ReserveEntity> listBookingData() {
@@ -65,11 +58,43 @@ public class ReserveService {
     }
 
     public List<ReserveEntity> listBookingDataByDocument(String document) {
-        System.out.println(reserveRepository.listByDocument(document));
         return reserveRepository.listByDocument(document);
     }
 
     public boolean deleteById(Long id) {
         return reserveRepository.deleteById(id);
+    }
+
+    public Boolean checkAvailability(RegisterReserveDTO bookdata) {
+        List<ReserveEntity> bookingRoom = listBookingData();
+        if (Objects.nonNull(bookingRoom)) {
+            bookingRoom.forEach(data -> {
+                if ((bookdata.getEntryDate().isAfter(data.getEntryDate()))
+                        && (bookdata.getEntryDate().isBefore(data.getDepartureDate()))) {
+                    throw new WebApplicationException("There is already a reservation for that date!");
+                } else if(bookdata.getDepartureDate().isAfter(data.getEntryDate())
+                        && bookdata.getDepartureDate().isBefore(data.getDepartureDate())) {
+                    throw new WebApplicationException("There is already a reservation for that date!");
+                } else if (bookdata.getEntryDate().isEqual(data.getEntryDate())
+                        || bookdata.getEntryDate().isEqual(data.getDepartureDate())
+                        || bookdata.getDepartureDate().isEqual(data.getEntryDate())) {
+                    throw new WebApplicationException("There is already a reservation for that date!");
+                }
+            });
+        }
+
+        if (bookdata.getEntryDate().isBefore(LocalDate.now())) {
+            throw new WebApplicationException("Booking date cannot be less than today!");
+        }
+
+        if (bookdata.getEntryDate().isAfter(LocalDate.now().plusDays(30))) {
+            throw new WebApplicationException("Booking date cannot be longer than 30 days!");
+        }
+
+        if (bookdata.getDepartureDate().isAfter(bookdata.getEntryDate().plusDays(2))) {
+            throw new WebApplicationException("The reservation period cannot be longer than 3 days!");
+        }
+
+        return true;
     }
 }

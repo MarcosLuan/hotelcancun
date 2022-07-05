@@ -2,8 +2,6 @@ package br.com.hotel.dto;
 
 import io.smallrye.common.constraint.NotNull;
 
-import java.time.LocalDateTime;
-
 public class RegisterUserDTO {
 
     @NotNull

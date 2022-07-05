@@ -1,17 +1,12 @@
 package br.com.hotel.entity;
 
-import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
+import io.quarkus.hibernate.orm.panache.PanacheEntity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 
-@Entity(name = "user")
-public class UserEntity extends PanacheEntityBase {
-
-    @Id
-    @Column(name = "id", nullable = false)
-    private Long id;
+@Entity(name = "users")
+public class UserEntity extends PanacheEntity {
 
     @Column(name = "document", nullable = false)
     private String document;
@@ -21,14 +16,6 @@ public class UserEntity extends PanacheEntityBase {
 
     @Column(name = "phone")
     private String phone;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getDocument() {
         return document;

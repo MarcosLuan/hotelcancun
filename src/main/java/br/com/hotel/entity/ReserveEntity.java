@@ -1,17 +1,13 @@
 package br.com.hotel.entity;
 
-import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
+import io.quarkus.hibernate.orm.panache.PanacheEntity;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
 import java.time.LocalDate;
 
 @Entity(name = "reserve")
-public class ReserveEntity extends PanacheEntityBase {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
-    private Long id;
+public class ReserveEntity extends PanacheEntity {
 
     @Column(name = "user_name", nullable = false)
     private String userName;
@@ -27,14 +23,6 @@ public class ReserveEntity extends PanacheEntityBase {
 
     @Column(name = "departure_date", nullable = false)
     private LocalDate departureDate;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getUserName() {
         return userName;

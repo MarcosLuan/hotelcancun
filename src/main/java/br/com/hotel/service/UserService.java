@@ -28,7 +28,6 @@ public class UserService {
     }
 
     public List<UserEntity> listUsers() {
-        System.out.println(userRepository.listAll());
         return userRepository.listAll();
     }
 }
