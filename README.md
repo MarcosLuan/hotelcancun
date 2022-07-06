@@ -64,11 +64,27 @@ http://localhost:8082/bookroom/byDocument/{user_document}
 POST bookrooms save
 ```
 http://localhost:8082/bookroom/save
+
+{
+	"userDocument":"String",
+	"userName":"String",
+	"phoneUser":"String",
+	"entryDate":"2022-07-20",
+	"departureDate":"2022-07-22"
+}
 ```
 
 PUT change bookroom
 ```
 http://localhost:8082/bookroom/change
+{
+    "id":1
+	"userDocument":"String",
+	"userName":"String",
+	"phoneUser":"String",
+	"entryDate":"2022-07-20",
+	"departureDate":"2022-07-22"
+}
 ```
 
 ###Users
@@ -80,6 +96,11 @@ http://localhost:8082/user
 POST save new user
 ```
 http://localhost:8082/user/save
+{
+    "document": "String",
+    "name": "String",
+    "phone": "String"
+}
 ```
 
 ###Rooms
@@ -91,6 +112,10 @@ http://localhost:8082/room
 POST save new hotel room
 ```
 http://localhost:8082/room/save
+{
+    "hotelName": "String",
+    "numberRoom": 101
+}
 ```
 Note: Used only one room for the hotel
 
