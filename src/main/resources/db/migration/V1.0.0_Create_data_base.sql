@@ -12,7 +12,9 @@ CREATE TABLE reserve (
     user_name character varying(255) NOT NULL,
     phone_number character varying(255),
     entry_date date NOT NULL,
-    departure_date date NOT NULL
+    departure_date date NOT NULL,
+    hotel character varying(255) NOT NULL,
+    room integer NOT NULL
 );
 
 CREATE SEQUENCE reserve_sequence

@@ -2,17 +2,16 @@ package br.com.hotel.service;
 
 import br.com.hotel.dto.RegisterReserveDTO;
 import br.com.hotel.entity.ReserveEntity;
+import br.com.hotel.entity.RoomEntity;
 import br.com.hotel.mapper.ReserveMapper;
 import br.com.hotel.repository.ReserveRepository;
+import br.com.hotel.repository.RoomRepository;
 import exception.WebApplicationExceptionError;
-import org.apache.http.HttpStatus;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
 import javax.ws.rs.WebApplicationException;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
@@ -25,6 +24,9 @@ public class ReserveService {
     ReserveRepository reserveRepository;
 
     @Inject
+    RoomRepository roomRepository;
+
+    @Inject
     ReserveMapper reserveMapper;
 
     public ReserveEntity bookroomSave(RegisterReserveDTO bookdata) {
@@ -34,7 +36,10 @@ public class ReserveService {
         }
 
         if (Boolean.TRUE.equals(checkAvailability(bookdata))) {
+            RoomEntity hotel = roomRepository.findAll().firstResult();
             ReserveEntity reserve = reserveMapper.toEntity(bookdata);
+            reserve.setHotel(hotel.getHotelName());
+            reserve.setRoom(hotel.getNumberRoom());
             reserveRepository.persist(reserve);
             return reserve;
         }
@@ -42,17 +47,26 @@ public class ReserveService {
     }
 
     public ReserveEntity bookroomChange(RegisterReserveDTO bookdata) {
-        if (bookdata == null) {
-            return null;
+        ReserveEntity reserve = reserveRepository.findById(bookdata.getId());
+        RoomEntity hotel = roomRepository.findAll().firstResult();
+        if (reserve == null) {
+            throw new WebApplicationExceptionError("Reservation not found!",
+                    "Reservation not found!");
         }
 
         if (Boolean.TRUE.equals(checkAvailability(bookdata))) {
-            ReserveEntity reserve = reserveMapper.toEntity(bookdata);
+            reserve.setUserName(bookdata.getUserName());
+            reserve.setPhoneUser(bookdata.getPhoneUser());
+            reserve.setEntryDate(bookdata.getEntryDate());
+            reserve.setDepartureDate(bookdata.getDepartureDate());
+            reserve.setHotel(hotel.getHotelName());
+            reserve.setRoom(hotel.getNumberRoom());
             reserveRepository.persist(reserve);
             return reserve;
         }
 
-        return null;
+        throw new WebApplicationExceptionError("Error: not found!",
+                "Error: not found!");
     }
 
     public List<ReserveEntity> listBookingData() {

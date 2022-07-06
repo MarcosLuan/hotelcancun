@@ -9,17 +9,17 @@ import javax.persistence.Entity;
 public class RoomEntity extends PanacheEntity {
 
     @Column(name = "number", nullable = false, unique = true)
-    private int number;
+    private int numberRoom;
 
     @Column(name = "hotel", nullable = false)
     private String hotelName;
 
-    public int getNumber() {
-        return number;
+    public int getNumberRoom() {
+        return numberRoom;
     }
 
-    public void setNumber(int number) {
-        this.number = number;
+    public void setNumberRoom(int numberRoom) {
+        this.numberRoom = numberRoom;
     }
 
     public String getHotelName() {

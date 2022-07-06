@@ -15,6 +15,8 @@ public class ReserveMapper {
         reserveEntity.setPhoneUser(bookRoom.getPhoneUser());
         reserveEntity.setEntryDate(bookRoom.getEntryDate());
         reserveEntity.setDepartureDate(bookRoom.getDepartureDate());
+        reserveEntity.setHotel(bookRoom.getHotel());
+        reserveEntity.setRoom(bookRoom.getRoom());
         return reserveEntity;
     }
 

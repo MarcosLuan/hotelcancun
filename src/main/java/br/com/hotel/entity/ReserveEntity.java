@@ -24,6 +24,12 @@ public class ReserveEntity extends PanacheEntity {
     @Column(name = "departure_date", nullable = false)
     private LocalDate departureDate;
 
+    @Column(name = "hotel", nullable = false)
+    private String hotel;
+
+    @Column(name = "room", nullable = false)
+    private Integer room;
+
     public String getUserName() {
         return userName;
     }
@@ -62,5 +68,21 @@ public class ReserveEntity extends PanacheEntity {
 
     public void setDepartureDate(LocalDate departureDate) {
         this.departureDate = departureDate;
+    }
+
+    public String getHotel() {
+        return hotel;
+    }
+
+    public void setHotel(String hotel) {
+        this.hotel = hotel;
+    }
+
+    public Integer getRoom() {
+        return room;
+    }
+
+    public void setRoom(Integer room) {
+        this.room = room;
     }
 }

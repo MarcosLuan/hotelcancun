@@ -26,6 +26,12 @@ public class RegisterReserveDTO {
     @NotNull
     private LocalDate departureDate;
 
+    @NotNull
+    private String hotel;
+
+    @NotNull
+    private Integer room;
+
     public Long getId() {
         return id;
     }
@@ -72,5 +78,21 @@ public class RegisterReserveDTO {
 
     public void setDepartureDate(LocalDate departureDate) {
         this.departureDate = departureDate;
+    }
+
+    public String getHotel() {
+        return hotel;
+    }
+
+    public void setHotel(String hotel) {
+        this.hotel = hotel;
+    }
+
+    public Integer getRoom() {
+        return room;
+    }
+
+    public void setRoom(Integer room) {
+        this.room = room;
     }
 }

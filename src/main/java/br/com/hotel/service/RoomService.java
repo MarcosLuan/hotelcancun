@@ -20,7 +20,7 @@ public class RoomService {
 
         RoomEntity roomEntity = new RoomEntity();
         roomEntity.setHotelName(roomdata.getHotelName());
-        roomEntity.setNumber(roomdata.getNumber());
+        roomEntity.setNumberRoom(roomdata.getNumber());
 
         roomRepository.persist(roomEntity);
         return roomEntity;

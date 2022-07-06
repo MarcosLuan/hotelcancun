@@ -43,12 +43,12 @@ class ReserveResourceTest {
     @Test
     void bookroomChange() {
         RegisterReserveDTO dto = new RegisterReserveDTO();
-        dto.setId(4L);
-        dto.setUserDocument("0987654321");
+        dto.setId(3L);
+        dto.setUserDocument("1234567890");
         dto.setUserName("User Test 2");
         dto.setPhoneUser("+55987654321");
-        dto.setEntryDate(LocalDate.now().plusDays(10));
-        dto.setDepartureDate(LocalDate.now().plusDays(12));
+        dto.setEntryDate(LocalDate.now().plusDays(23));
+        dto.setDepartureDate(LocalDate.now().plusDays(24));
 
         given().contentType(MediaType.APPLICATION_JSON)
                 .body(dto)
