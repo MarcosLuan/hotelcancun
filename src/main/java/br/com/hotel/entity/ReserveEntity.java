@@ -12,7 +12,7 @@ public class ReserveEntity extends PanacheEntity {
     @Column(name = "user_name", nullable = false)
     private String userName;
 
-    @Column(name = "user_document", nullable = false)
+    @Column(name = "user_document", nullable = false, unique = true)
     private String userDocument;
 
     @Column(name = "phone_user")

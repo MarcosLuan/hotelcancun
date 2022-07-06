@@ -1,18 +1,17 @@
 package br.com.hotel.resource;
 
 import br.com.hotel.dto.RegisterUserDTO;
-import br.com.hotel.service.UserService;
-import org.junit.jupiter.api.Assertions;
+import io.quarkus.test.junit.QuarkusTest;
 import org.junit.jupiter.api.Test;
 
-import javax.inject.Inject;
+import javax.transaction.Transactional;
+import javax.ws.rs.core.MediaType;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static io.restassured.RestAssured.given;
 
+@QuarkusTest
+@Transactional
 class UserResourceTest {
-
-    @Inject
-    UserService userService;
 
     @Test
     void userSave() {
@@ -21,11 +20,21 @@ class UserResourceTest {
         dto.setName("Name Test");
         dto.setPhone("+55123123132");
 
-        Assertions.assertNotNull(userService.userSave(dto));
+        given().contentType(MediaType.APPLICATION_JSON)
+                .body(dto)
+                .when()
+                .post("/user/save")
+                .then()
+                .log().all()
+                .statusCode(200);
     }
 
     @Test
     void listUser() {
-        Assertions.assertNotNull(userService.listUsers());
+        given()
+                .when()
+                .get("/user")
+                .then()
+                .statusCode(200);
     }
 }

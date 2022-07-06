@@ -16,12 +16,12 @@ public class UserService {
     @Inject
     UserRepository userRepository;
 
-    public UserEntity userSave(RegisterUserDTO userdata) {
+    public UserEntity userSave(RegisterUserDTO userData) {
 
         UserEntity userEntity = new UserEntity();
-        userEntity.setDocument(userdata.getDocument());
-        userEntity.setName(userdata.getName());
-        userEntity.setPhone(userdata.getPhone());
+        userEntity.setDocument(userData.getDocument());
+        userEntity.setName(userData.getName());
+        userEntity.setPhone(userData.getPhone());
 
         userRepository.persist(userEntity);
         return userEntity;

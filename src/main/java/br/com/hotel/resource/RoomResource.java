@@ -22,7 +22,7 @@ public class RoomResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     @Path("/save")
-    public RoomEntity room(@RequestBody RegisterRoomDTO roomData) {
+    public RoomEntity roomSave(@RequestBody RegisterRoomDTO roomData) {
         return roomService.roomSave(roomData);
     }
 

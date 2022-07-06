@@ -29,6 +29,9 @@ The application, packaged as an _über-jar_, is now runnable using `java -jar ta
 ###For more information access
 [Related guide section...](https://quarkus.io/guides)
 
+###Database
+Create a local database named hotelcancun. The tables will be created automatically
+
 ### 🔧 Configurations
 
 To run this project on your machine, have the necessary java packages installed (JAVA 8 or plus),
@@ -40,6 +43,10 @@ All dependencies in pom.xml are necessary for correct operation.
 
 The tests are located in the directory: hotelcancun\src\test.
 Tests can be run normally in your development environment as per your local settings.
+
+## 🔩 Swagger
+
+http://localhost:8082/docs/
 
 ## 🔩 Requisitions Postman
 

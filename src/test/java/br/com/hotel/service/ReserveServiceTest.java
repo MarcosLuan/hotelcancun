@@ -8,8 +8,6 @@ import org.junit.jupiter.api.Test;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Date;
 
 @QuarkusTest
 @Transactional
@@ -20,15 +18,7 @@ class ReserveServiceTest {
 
     @Test
     void bookroomSave() {
-        RegisterReserveDTO dto = new RegisterReserveDTO();
-//        dto.setId(1L);
-        dto.setUserName("Marcos Luan");
-        dto.setUserDocument("1234567890");
-        dto.setPhoneUser("");
-        dto.setEntryDate(LocalDate.now());
-        dto.setDepartureDate(LocalDate.now().plusDays(2));
 
-//        Assertions.assertNotNull(reserveService.bookroomSave(dto));
     }
 
     @Test

@@ -8,7 +8,7 @@ import javax.persistence.Entity;
 @Entity(name = "users")
 public class UserEntity extends PanacheEntity {
 
-    @Column(name = "document", nullable = false)
+    @Column(name = "document", nullable = false, unique = true)
     private String document;
 
     @Column(name = "name", nullable = false)

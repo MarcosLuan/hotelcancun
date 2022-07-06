@@ -4,11 +4,15 @@ import br.com.hotel.dto.RegisterReserveDTO;
 import br.com.hotel.entity.ReserveEntity;
 import br.com.hotel.mapper.ReserveMapper;
 import br.com.hotel.repository.ReserveRepository;
+import exception.WebApplicationExceptionError;
+import org.apache.http.HttpStatus;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
 import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
@@ -38,7 +42,6 @@ public class ReserveService {
     }
 
     public ReserveEntity bookroomChange(RegisterReserveDTO bookdata) {
-//        ReserveEntity reserve = reserveRepository.findById(bookdata.getId());
         if (bookdata == null) {
             return null;
         }
@@ -69,32 +72,37 @@ public class ReserveService {
         List<ReserveEntity> bookingRoom = listBookingData();
         if (Objects.nonNull(bookingRoom)) {
             bookingRoom.forEach(data -> {
-                if ((bookdata.getEntryDate().isAfter(data.getEntryDate()))
-                        && (bookdata.getEntryDate().isBefore(data.getDepartureDate()))) {
-                    throw new WebApplicationException("There is already a reservation for that date!");
-                } else if(bookdata.getDepartureDate().isAfter(data.getEntryDate())
-                        && bookdata.getDepartureDate().isBefore(data.getDepartureDate())) {
-                    throw new WebApplicationException("There is already a reservation for that date!");
-                } else if (bookdata.getEntryDate().isEqual(data.getEntryDate())
+                if (((bookdata.getEntryDate().isAfter(data.getEntryDate()))
+                        && (bookdata.getEntryDate().isBefore(data.getDepartureDate())))
+                    || (bookdata.getDepartureDate().isAfter(data.getEntryDate())
+                        && bookdata.getDepartureDate().isBefore(data.getDepartureDate()))
+                    || (bookdata.getEntryDate().isEqual(data.getEntryDate())
                         || bookdata.getEntryDate().isEqual(data.getDepartureDate())
-                        || bookdata.getDepartureDate().isEqual(data.getEntryDate())) {
-                    throw new WebApplicationException("There is already a reservation for that date!");
+                        || bookdata.getDepartureDate().isEqual(data.getEntryDate()))) {
+                    throw new WebApplicationExceptionError("There is already a reservation for that date!",
+                            "There is already a reservation for that date!");
+                }
+                if (Objects.equals(bookdata.getUserDocument(), data.getUserDocument()) && bookdata.getId() == null) {
+                    throw new WebApplicationExceptionError("Reservation already exists for this user!",
+                            "Reservation already exists for this user!");
                 }
             });
         }
 
         if (bookdata.getEntryDate().isBefore(LocalDate.now())) {
-            throw new WebApplicationException("Booking date cannot be less than today!");
+            throw new WebApplicationExceptionError("Booking date cannot be less than today!",
+                    "Booking date cannot be less than today!");
         }
 
         if (bookdata.getEntryDate().isAfter(LocalDate.now().plusDays(30))) {
-            throw new WebApplicationException("Booking date cannot be longer than 30 days!");
+            throw new WebApplicationExceptionError("Booking date cannot be longer than 30 days!",
+                    "Booking date cannot be longer than 30 days!");
         }
 
         if (bookdata.getDepartureDate().isAfter(bookdata.getEntryDate().plusDays(2))) {
-            throw new WebApplicationException("The reservation period cannot be longer than 3 days!");
+            throw new WebApplicationExceptionError("The reservation period cannot be longer than 3 days!",
+                    "The reservation period cannot be longer than 3 days!");
         }
-
         return true;
     }
 }

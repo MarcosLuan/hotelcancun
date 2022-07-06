@@ -20,7 +20,7 @@ public class ReserveResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     @Path("save")
-    public void reserve(@RequestBody RegisterReserveDTO bookData) {
+    public void reserveSave(@RequestBody RegisterReserveDTO bookData) {
         reserveService.bookroomSave(bookData);
     }
 
