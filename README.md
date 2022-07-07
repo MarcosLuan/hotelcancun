@@ -26,10 +26,10 @@ If you want to build an _über-jar_, execute the following command:
 ```
 The application, packaged as an _über-jar_, is now runnable using `java -jar target/*-runner.jar`.
 
-###For more information access
+### For more information access
 [Related guide section...](https://quarkus.io/guides)
 
-###Database
+### Database
 Create a local database named hotelcancun. The tables will be created automatically
 
 ### 🔧 Configurations
@@ -39,18 +39,19 @@ To run this project on your machine, have the necessary java packages installed 
 After cloning the project, open it in your favorite development environment, start the project and wait for the dependencies to be installed.
 All dependencies in pom.xml are necessary for correct operation.
 
-## ⚙️ Tests
+## ⚙ Tests
 
 The tests are located in the directory: hotelcancun\src\test.
 Tests can be run normally in your development environment as per your local settings.
 
 ## 🔩 Swagger
-
+Access the path with the project running:
 http://localhost:8082/docs/
 
 ## 🔩 Requisitions Postman
 
-###Bookroom
+### Bookroom
+
 GET all bookrooms
 ```
 http://localhost:8082/bookroom
@@ -64,7 +65,6 @@ http://localhost:8082/bookroom/byDocument/{user_document}
 POST bookrooms save
 ```
 http://localhost:8082/bookroom/save
-
 {
 	"userDocument":"String",
 	"userName":"String",
@@ -87,7 +87,8 @@ http://localhost:8082/bookroom/change
 }
 ```
 
-###Users
+### Users
+
 GET all users
 ```
 http://localhost:8082/user
@@ -103,7 +104,8 @@ http://localhost:8082/user/save
 }
 ```
 
-###Rooms
+### Rooms
+
 GET all rooms
 ```
 http://localhost:8082/room
